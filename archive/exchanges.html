@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exchanges</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<h2>Exchanges</h2>
+
+{% for exchange in exchanges %}
+    <!--{{ exchange.Code }} <br />-->
+    {{ exchange }} <br />
+{% endfor %}
+
+<!--<div>
+    <button type="button" onclick="alert('This 15-20 minute piece was composed by George Gershwin.')">Download TastyLive Audio</button>
+</div>-->
+<a href="/tasty" class="btn btn-primary">Download TastyLive Audio</a>
+<!--<form action="/tasty">
+    <input type="submit" value="Download TastyLive Audio" />
+</form>-->
+
+
+<!-- Bootstrap Javascripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

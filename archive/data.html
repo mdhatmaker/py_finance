@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Form Data</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<h1>form_data Values</h1>
+
+{% for key,value in form_data.items() %}
+<h4> {{key}}</h4>
+<p> {{value}}</p>
+{% endfor %}
+
+<hr />
+
+{{ form_data['ticker_symbol'] }} <br />
+{{ form_data['start_date'] }} <br />
+{{ form_data['end_date'] }} <br />
+
+
+<hr />
+<br />
+
+
+<!-- Bootstrap Javascripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
+
+
+
+<!-- Template Variable Filters -->
+<!-- Capitalize the string -->
+<!--<h1>{{ heading_var | upper  }}</h1>-->
+
+<!-- Default string when no_var not declared -->
+<!--<h1>{{ no_var | default("My Website") }}</h1>-->
+
+

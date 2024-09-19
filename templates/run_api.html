@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MNA Investments Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<h2>MNA Investments Dashboard</h2>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-2" style="font-weight:bold">
+        &nbsp;Status Message:
+    </div>
+    <div class="col-md-6">
+        {{ msg }}&nbsp;&nbsp;&nbsp;[{{ msgTime }}]
+    </div>
+</div>
+
+<hr />
+<div class="row" style="background-color:lightgray">
+    <div class="col-md-3" style="padding:5px">
+        <label for="ticker_symbol" style="font-weight:bold">&nbsp;&nbsp;Ticker</label>
+        <input type="text" name="ticker_symbol" id="ticker_symbol" value="AAPL" />
+    </div>
+    <div class="col-md-3" style="padding:5px">
+        <label for="start_date" style="font-weight:bold">Start</label>
+        <input type="text" name="start_date" id="start_date" value="2022-01-01" />
+    </div>
+    <div class="col-md-3" style="padding:5px">
+        <label for="end_date" style="font-weight:bold">End</label>
+        <input type="text" name="end_date" id="end_date" value="2024-06-19" />
+    </div>
+</div>
+
+<!--<form action="/blogs/ind_kalman" method = "POST">
+    <p>Ticker Symbol <input type = "text" name = "ticker_symbol" value="AAPL" /></p>
+    <p>Start Date <input type = "text" name = "start_date" /></p>
+    <p>End Date <input type = "text" name = "end_date" /></p>
+    <input type="hidden" id="open_url" name="open_url" value="/ind_kalman" />
+    <p><input type="submit" value="Kalman Filter" /></p>
+</form>-->
+
+<script>
+function start_run(section, select_url) {
+    //window.open("/run/" + section,"_self")
+    console.log("LOG--> " + section + " | " + select_url)
+    fetch("/run/" + section, {
+      method: "POST",
+      body: JSON.stringify({
+          ticker_symbol: document.getElementById("ticker_symbol").value,    // "INTC",
+          start_date: document.getElementById("start_date").value,          // "2022-01-01",
+          end_date: document.getElementById("end_date").value,              // "2024-06-20",
+          select_url: select_url
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    })
+      .then((response) => response.json())
+      .then((json) => console.log(json));
+}
+</script>
+
+
+<hr />
+<form action="/run/data" method = "POST">
+    <h4>&nbsp;Data Requests</h4>
+    <div class="row">
+        <div class="col-md-4"  style="padding:15px">
+            <select name="select_url" id="select_url">
+                <option value="/api_coinbase">Coinbase API - Download historical</option>
+                <option value="/api_binance">Binance API - Start price stream</option>
+            </select>
+        </div>
+        <div class="col-md-2" style="padding:5px;justify-content:stretch">
+            <!--<button type="submit" class="w-100 btn btn-primary">Submit</button>-->
+            <button type="button" onclick="start_run('data', select_url.value)" class="w-100 btn btn-primary">Submit</button>
+        </div>
+    </div>
+</form>
+
+<hr />
+<form action="/run/indicators1" method = "POST">
+    <h4>&nbsp;Indicators</h4>
+    <div class="row">
+        <div class="col-md-4"  style="padding:15px">
+            <select name="select_url" id="select_url">
+                <option value="/ind_adx">ADX indicator</option>
+                <option value="/ind_bbands">Bollinger Bands indicator</option>
+                <option value="/ind_macd">MACD indicator</option>
+                <option value="/ind_rsi">RSI indicator</option>
+                <option value="/ind_stoch">Stochastic indicator</option>
+                <option value="/ind_kalman">Kalman Filter indicator</option>
+                <option value="/ind_var">Value at Risk indicator</option>
+                <option value="/ind_supertrend">Supertrend indicator</option>
+                <option value="/ind_dtw">Dynamic Time Warping indicator</option>
+                <option value="/ind_undervalued">Undervalued Sentiment Screener indicator</option>
+                <option value="/ind_candlestick">Candlestick TA indicator</option>
+                <option value="/ind_zscore">Z-Score indicator</option>
+                <option value="/ind_zigzag">Zig-Zag indicator</option>
+                <option value="/ind_pcadtw">Principle Component Analysis / Dynamic Time Warping</option>
+                <option value="/ind_supportresist">Support/Resistance indicator</option>
+            </select>
+        </div>
+        <div class="col-md-2" style="padding:5px;justify-content:stretch">
+            <!--<button type="submit" class="w-100 btn btn-primary">Submit</button>-->
+            <button type="button" onclick="start_run('indicators1', select_url.value)" class="w-100 btn btn-primary">Submit</button>
+        </div>
+    </div>
+</form>
+
+<hr />
+<form action="/run/indicators2" method = "POST">
+    <h4>&nbsp;More Indicators (Volatility, Volume, Obscure)</h4>
+    <div class="row">
+        <div class="col-md-4"  style="padding:15px">
+            <select name="select_url" id="select_url">
+                <option value="/ind_atr">Average True Range indicator</option>
+                <option value="/ind_bollinger">Bollinger Bands indicator</option>
+                <option value="/ind_donchian">Donchian Channels indicator</option>
+                <option value="/ind_keltner">Keltner Channels indicator</option>
+                <option value="/ind_rvi">Relative Volatility Index indicator</option>
+                <option value="/ind_chaikin">Volatility Chaikin indicator</option>
+                <option value="/ind_volnvi">Negative Volume Index indicator</option>
+                <option value="/ind_volobv">On-Balance Volume indicator</option>
+                <option value="/ind_volvpt">Volume Price Trend indicator</option>
+                <option value="/ind_volvrc">Volume Rate of Change indicator</option>
+                <option value="/ind_volcmf">Chaikin Money Flow indicator</option>
+                <option value="/ind_volvwap">Volume Weighted Average Price indicator</option>
+                <option value="/ind_voladline">Advance/Decline Line indicator</option>
+                <option value="/ind_volmfi">Money Flow Index indicator</option>
+                <option value="/ind_volko">Klinger Oscillator indicator</option>
+                <option value="/ind_aroon">Aroon Oscillator indicator</option>
+                <option value="/ind_demarker">Demarker indicator</option>
+                <option value="/ind_relvigor">Relative Vigor indicator</option>
+                <option value="/ind_threeway">Three Way Average Crossover indicator</option>
+                <option value="/ind_trendexhaust">Trend Exhaustion indicator</option>
+                <option value="/ind_obscureind">other obscure indicators</option>
+            </select>
+        </div>
+        <div class="col-md-2" style="padding:5px;justify-content:stretch">
+            <!--<button type="submit" class="w-100 btn btn-primary">Submit</button>-->
+            <button type="button" onclick="start_run('indicators2', select_url.value)" class="w-100 btn btn-primary">Submit</button>
+        </div>
+    </div>
+</form>
+
+<hr />
+<form action="/run/sigandstrat" method = "POST">
+    <h4>&nbsp;Signals and Strategies</h4>
+    <div class="row">
+        <div class="col-md-4"  style="padding:15px">
+            <select name="select_url" id="select_url">
+                <option value="/sig_sentiment">Sentiment signal</option>
+                <option value="/sig_pairs">Pairs Trading signal</option>
+                <option value="/strat_smacross">SMA Crossover strategy</option>
+                <option value="/strat_momentum">Naive Momentum strategy</option>
+                <option value="/strat_meanrevert">Mean Reversion strategy</option>
+                <option value="/strat_dynrenko">Dynamic Renko strategy</option>
+                <option value="/strat_citadelpairs">Citadel Pairs strategy</option>
+                <option value="/strat_deeplearn">Deep Learning (simple) strategy</option>
+                <option value="/strat_macross">MA Crossover strategy</option>
+            </select>
+        </div>
+        <div class="col-md-2" style="padding:5px;justify-content:stretch">
+            <!--<button type="submit" class="w-100 btn btn-primary">Submit</button>-->
+            <button type="button" onclick="start_run('sigandstrat', select_url.value)" class="w-100 btn btn-primary">Submit</button>
+
+        </div>
+    </div>
+</form>
+
+<hr />
+<form action="/run/risk" method = "POST">
+    <h4>&nbsp;Portfolio Risk</h4>
+    <div class="row">
+        <div class="col-md-4"  style="padding:15px">
+            <select name="select_url" id="select_url">
+                <option value="/risk_hrpcompare">HRP Compare</option>
+                <option value="/risk_hrpport">HRP Portfolio</option>
+                <option value="/risk_hrprebalance">HRP Rebalancing</option>
+                <option value="/risk_hrpparity">HRP Parity Rebalancing</option>
+            </select>
+        </div>
+        <div class="col-md-2" style="padding:5px;justify-content:stretch">
+            <!--<button type="submit" class="w-100 btn btn-primary">Submit</button>-->
+            <button type="button" onclick="start_run('risk', select_url.value)" class="w-100 btn btn-primary">Submit</button>
+        </div>
+    </div>
+</form>
+
+<hr />
+<form action="/run/predict" method = "POST">
+    <h4>&nbsp;Predictors / Forecasts</h4>
+    <div class="row">
+        <div class="col-md-4"  style="padding:15px">
+            <select name="select_url" id="select_url">
+                <option value="/pred_prophet">Prophet forecast</option>
+                <option value="/pred_xgboost">XGBoost forecast</option>
+                <option value="/pred_timegpt">TimeGPT forecast</option>
+                <option value="/pred_nhits">NHITS forecast</option>
+            </select>
+        </div>
+        <div class="col-md-2" style="padding:5px;justify-content:stretch">
+            <!--<button type="submit" class="w-100 btn btn-primary">Submit</button>-->
+            <button type="button" onclick="start_run('predict', select_url.value)" class="w-100 btn btn-primary">Submit</button>
+        </div>
+    </div>
+</form>
+
+<hr />
+<form action="/run/research" method = "POST">
+    <h4>&nbsp;Research</h4>
+    <div class="row">
+        <div class="col-md-4"  style="padding:15px">
+            <select name="select_url" id="select_url">
+                <option value="/research_incstmt">Income Statement</option>
+                <option value="/research_finstmts">Financial Statements</option>
+                <option value="/research_ratios">Financial Ratios</option>
+                <option value="/research_balsheet">Balance Sheet</option>
+            </select>
+        </div>
+        <div class="col-md-2" style="padding:5px;justify-content:stretch">
+            <!--<button type="submit" class="w-100 btn btn-primary">Submit</button>-->
+            <button type="button" onclick="start_run('research', select_url.value)" class="w-100 btn btn-primary">Submit</button>
+        </div>
+    </div>
+</form>
+
+<hr />
+
+
+<!-- Bootstrap Javascripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

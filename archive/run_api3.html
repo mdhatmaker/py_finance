@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Run API Functions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<h2>Run API Functions</h2>
+
+<hr />
+<br />
+
+<h4>Status Message:</h4>
+[{{ msgTime }}] {{ msg }}
+
+<hr />
+
+<form action="/blogs/ind_kalman" method = "POST">
+    <p>Ticker Symbol <input type = "text" name = "ticker_symbol" value="AAPL" /></p>
+    <p>Start Date <input type = "text" name = "start_date" /></p>
+    <p>End Date <input type = "text" name = "end_date" /></p>
+    <input type="hidden" id="open_url" name="open_url" value="/ind_kalman" />
+    <p><input type="submit" value="Kalman Filter" /></p>
+    <!--<a href="/ind_kalman" class="btn btn-primary">Kalman Filter indicator</a>-->
+</form>
+
+
+<hr />
+<h4>Data Requests</h4>
+<a href="/api_coinbase" class="btn btn-primary">Coinbase API - Download historical</a>
+<a href="/api_binance" class="btn btn-primary">Binance API - Start price stream</a>
+<hr />
+<h4>Indicators</h4>
+<a href="/ind_kalman" class="btn btn-primary">Kalman Filter indicator</a>
+<a href="/ind_var" class="btn btn-primary">Value at Risk indicator</a>
+<a href="/ind_supertrend" class="btn btn-primary">Supertrend indicator</a>
+<a href="/ind_dtw" class="btn btn-primary">Dynamic Time Warping indicator</a>
+<br /><br />
+<a href="/ind_undervalued" class="btn btn-primary">Undervalued Sentiment Screener indicator</a>
+<a href="/ind_candlestick" class="btn btn-primary">Candlestick TA indicator</a>
+<a href="/ind_zscore" class="btn btn-primary">Z-Score indicator</a>
+<a href="/ind_zigzag" class="btn btn-primary">Zig-Zag indicator</a>
+<br /><br />
+<a href="/ind_pcadtw" class="btn btn-primary">Principle Component Analysis / Dynamic Time Warping</a>
+<a href="/ind_supportresist" class="btn btn-primary">Support/Resistance indicator</a>
+<hr />
+<h4>Basic Indicators</h4>
+<a href="/ind_adx" class="btn btn-primary">ADX indicator</a>
+<a href="/ind_bbands" class="btn btn-primary">Bollinger Bands indicator</a>
+<a href="/ind_macd" class="btn btn-primary">MACD indicator</a>
+<a href="/ind_rsi" class="btn btn-primary">RSI indicator</a>
+<a href="/ind_stoch" class="btn btn-primary">Stochastic indicator</a>
+<hr />
+<h4>Volatility Indicators</h4>
+<a href="/ind_atr" class="btn btn-primary">Average True Range</a>
+<a href="/ind_bollinger" class="btn btn-primary">Bollinger Bands indicator</a>
+<a href="/ind_donchian" class="btn btn-primary">Donchian Channels indicator</a>
+<br /><br />
+<a href="/ind_keltner" class="btn btn-primary">Keltner Channels indicator</a>
+<a href="/ind_rvi" class="btn btn-primary">Relative Volatility Index indicator</a>
+<a href="/ind_chaikin" class="btn btn-primary">Volatility Chaikin indicator</a>
+<hr />
+<h4>Volume Indicators</h4>
+<a href="/ind_volnvi" class="btn btn-primary">Negative Volume Index indicator</a>
+<a href="/ind_volobv" class="btn btn-primary">On-Balance Volume indicator</a>
+<a href="/ind_volvpt" class="btn btn-primary">Volatility Price Trend indicator</a>
+<br /><br />
+<a href="/ind_volvroc" class="btn btn-primary">Volume Rate of Change indicator</a>
+<a href="/ind_volcmf" class="btn btn-primary">Chaikin Money Flow indicator</a>
+<a href="/ind_volvwap" class="btn btn-primary">Volume Weighted Average Price indicator</a>
+<br /><br />
+<a href="/ind_voladline" class="btn btn-primary">Advance/Decline Line indicator</a>
+<a href="/ind_volmfi" class="btn btn-primary">Money Flow Index indicator</a>
+<a href="/ind_volko" class="btn btn-primary">Klinger Oscillator indicator</a>
+<hr />
+<h4>Obscure Indicators</h4>
+<a href="/ind_aroon" class="btn btn-primary">Aroon Oscillator indicator</a>
+<a href="/ind_demarker" class="btn btn-primary">Demarker indicator</a>
+<a href="/ind_relvigor" class="btn btn-primary">Relative Vigor indicator</a>
+<br /><br />
+<a href="/ind_threeway" class="btn btn-primary">Three Way Average Crossover indicator</a>
+<a href="/ind_trendexhaust" class="btn btn-primary">Trend Exhaustion indicator</a>
+<a href="/ind_obscureind" class="btn btn-primary">other obscure indicators</a>
+<hr />
+<h4>Signals</h4>
+<a href="/sig_sentiment" class="btn btn-primary">Sentiment signal</a>
+<a href="/sig_pairs" class="btn btn-primary">Pairs Trading signal</a>
+<hr />
+<h4>Strategies</h4>
+<a href="/strat_smacross" class="btn btn-primary">SMA Crossover strategy</a>
+<a href="/strat_momentum" class="btn btn-primary">Naive Momentum strategy</a>
+<a href="/strat_meanrevert" class="btn btn-primary">Mean Reversion strategy</a>
+<a href="/strat_dynrenko" class="btn btn-primary">Dynamic Renko strategy</a>
+<br /><br />
+<a href="/strat_citadelpairs" class="btn btn-primary">Citadel Pairs strategy</a>
+<!--<a href="/strat_zscore" class="btn btn-primary">ZScore strategy</a>-->
+<a href="/strat_deeplearn" class="btn btn-primary">Deep Learning (simple) strategy</a>
+<a href="/strat_macross" class="btn btn-primary">MA Crossover strategy</a>
+<hr />
+<h4>Portfolio Risk</h4>
+<a href="/risk_hrpcompare" class="btn btn-primary">HRP Compare</a>
+<a href="/risk_hrpport" class="btn btn-primary">HRP Portfolio</a>
+<a href="/risk_hrprebalance" class="btn btn-primary">HRP Rebalancing</a>
+<a href="/risk_hrpparity" class="btn btn-primary">HRP Parity Rebalancing</a>
+<hr />
+<h4>Research</h4>
+<a href="/research_incstmt" class="btn btn-primary">Income Statement</a>
+<a href="/research_finstmts" class="btn btn-primary">Financial Statements</a>
+<a href="/research_ratios" class="btn btn-primary">Financial Ratios</a>
+<a href="/research_balsheet" class="btn btn-primary">Balance Sheet</a>
+<hr />
+<h4>Predictors / Forecasts</h4>
+<a href="/pred_prophet" class="btn btn-primary">Prophet forecast</a>
+<a href="/pred_xgboost" class="btn btn-primary">XGBoost forecast</a>
+<a href="/pred_timegpt" class="btn btn-primary">TimeGPT forecast</a>
+<a href="/pred_nhits" class="btn btn-primary">NHITS forecast</a>
+<hr />
+
+
+<!-- Bootstrap Javascripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
